@@ -2,3 +2,4 @@ VideoPose3D
 *.csv
 *.mp4
 *.avi
+.DS_Store
