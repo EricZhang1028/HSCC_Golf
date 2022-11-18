@@ -1,3 +1,8 @@
+'''
+-p --> image path
+-s --> skipped frame count
+'''
+
 import argparse
 from ast import parse
 import cv2
@@ -21,23 +26,24 @@ def main(args):
     fontScale = 1
     thickness = 2
 
-    cnt = 0
+    frame_no = 0
     if skip_frame != 0:
         while cap.isOpened():
-            cnt += 1
             ret, frame = cap.read()
             if not ret:
                 print("Can't receive frame (stream end?). Exiting...")
                 break
-            if cnt == skip_frame: break
+            frame_no += 1
+            if frame_no == skip_frame: break
 
-    frame_no = cnt + 1
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
             print("Can't receive frame (stream end?). Exiting...")
             break
-        img = cv2.resize(frame, (int(width * 0.6), int(height * 0.6)))
+        frame_no += 1
+        # img = cv2.resize(frame, (int(width * 0.6), int(height * 0.6)))
+        img = frame
         img = cv2.putText(img, f"{width} x {height}", (10, 30), font, fontScale, color, thickness, cv2.LINE_AA)
         img = cv2.putText(img, "FPS:" + str(fps), (10, 70), font, fontScale, color, thickness, cv2.LINE_AA)
         img = cv2.putText(img, "Frame no.: " + str(frame_no), (10, 105), font, fontScale, color, thickness, cv2.LINE_AA)
@@ -48,7 +54,7 @@ def main(args):
         #     cv2.imwrite("brightness.jpg", frame)
         if key == ord('q'):
             break
-        frame_no += 1
+        
 
     cap.release()
     cv2.destroyAllWindows()

@@ -3,4 +3,3 @@ VideoPose3D
 *.mp4
 *.avi
 .DS_Store
-*.npz

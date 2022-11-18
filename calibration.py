@@ -9,9 +9,9 @@ OUTPUT_DIR = "data/cali_out"
 # 11 x 7 ->　70mm
 def make_parser():
     parser = argparse.ArgumentParser("Calibration")
-    parser.add_argument("-r", "--rows", default=11, type=int, help="#rows of chessboard")
-    parser.add_argument("-c", "--cols", default=7, type=int, help="#cols of chessboard")
-    parser.add_argument("-m", "--mm", default=70, type=int, help="width per block using mm")
+    parser.add_argument("-r", "--rows", default=12, type=int, help="#rows of chessboard")
+    parser.add_argument("-c", "--cols", default=8, type=int, help="#cols of chessboard")
+    parser.add_argument("-m", "--mm", default=90, type=int, help="width per block using mm")
     parser.add_argument("-p", "--path", default="data/sample", help="images path")
     parser.add_argument("-s", "--show", default=False, type=bool, help="show camlibarte image")
     parser.add_argument("-w", default=False, type=bool, help="Is windows?")
@@ -39,7 +39,7 @@ def main(args):
 
         if ret:
             # Refine the corner position
-            corners = cv2.cornerSubPix(gray, corners, (5, 5), (-1, -1), criteria)
+            corners = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
 
             objectPointsArray.append(objectPoints)
             imgPointsArray.append(corners)

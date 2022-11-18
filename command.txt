@@ -1,0 +1,15 @@
+rename chessboard
+python rename_cb.py -p data/1117/cali_in/
+
+
+show video by frame
+python show_frame.py -p data/1117/swing_1/video.avi -s 0
+
+
+calibrate camera
+python calibration.py -p data/1117/cali_in/ -r 12 -c 8 -m 90 -s True
+
+
+project coordinates
+python projection.py -p data/1117/cali_in/base_cb.bmp -n data/1117/cali_out.npz -s True
+
